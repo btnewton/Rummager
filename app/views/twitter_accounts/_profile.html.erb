@@ -1,0 +1,14 @@
+<div class="card">
+	<div class="container">
+		<div class="row">
+				<div class="col s12 m2">
+					<%=  %>
+					<%= image_tag(twitter_account.profile_picture_url, alt: "#{twitter_account.name} profile picture") %>
+				</div>
+				<div class="col s12 m10">
+					<%= twitter_account.name %><br/>
+					<%= twitter_account.screenname %>
+				</div>
+		</div>
+	</div>
+</div>
