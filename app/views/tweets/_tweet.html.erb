@@ -1,5 +1,18 @@
 <div class="tweet">
-	<div class="flow-text">
+	<div class="tweet-content flow-text">
 		<%= tweet.text %>
+	</div>
+	<div class="container">
+	<div class="tweet-info row">
+		<div class="col s6 m3 valign-wrapper">
+			<i class="material-icons">thumb_up</i><%= tweet.retweets %>
+		</div>
+		<div class="col s6 m3 valign-wrapper">
+			<i class="material-icons">reply</i><%= tweet.likes %>
+		</div>
+		<div class="col s12 m6">
+			<%= tweet.posted_at.strftime('%B %e at %l:%M %p') %>
+		</div>
+	</div>
 	</div>
 </div>

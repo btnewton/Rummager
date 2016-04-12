@@ -4,4 +4,15 @@
 
 .tweet {
 	padding: 16px;
+	border-bottom: 1px solid #dddddd;
+}
+.tweet .tweet-content {
+	padding-bottom: 12px;
+}
+.tweet i {
+	font-size: 14pt;
+	margin-right: 6px;
+}
+.tweet .tweet-info {
+	color: #9a9a9a;
 }

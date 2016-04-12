@@ -1,11 +1,41 @@
-one:
-  text: We must overturn Citizens United if we are serious about maintaining the foundations of American democracy. \#DemocracySpring
+elonmusk1:
+  twitter_account: elonmusk
+  text: Activate autopilot 4X in quick succession for psychedelic cowbell road. And, yes, we are adding more cowbell soon.
   posted_at: 2016-04-11 17:52:55
-  retweets: 307
-  likes: 601
+  retweets: 1200
+  likes: 4800
 
-two:
-  text: It’s wrong to think we can frack our way out of the climate crisis. Natural gas isn’t a "bridge fuel,” it’s a fossil fuel.
+elonmusk2:
+  twitter_account: elonmusk
+  text: Just wanted to write a note of appreciation for all those who have supported Tesla, SpaceX & SolarCity over the years. Thank you.
   posted_at: 2016-04-11 15:54:24
-  retweets: 1129
-  likes: 2649
+  retweets: 7200
+  likes: 35000
+
+elonmusk3:
+  twitter_account: elonmusk
+  text: Over 325k cars or ~$14B in preorders in first week. Only 5% ordered max of two, suggesting low levels of speculation.
+  posted_at: 2016-04-07 15:54:24
+  retweets: 4800
+  likes: 9500
+
+elonmusk4:
+  twitter_account: elonmusk
+  text: Most telling is that the SpaceX Propulsion CTO switched from driving a Porsche 911 Turbo S to a Model X
+  posted_at: 2016-04-05 10:54:24
+  retweets: 827
+  likes: 4200
+
+singervehicles1:
+  twitter_account: singervehicles
+  text: 'RT @PorscheRetail: Simply beatuiful... @singervehicles Have a fantastic \#Porsche Sunday folks! @CarSnapped @PrestigeDiesels @AutoPap'
+  posted_at: 2016-04-09 10:54:24
+  retweets: 827
+  likes: 4200
+
+rails1:
+  twitter_account: rails
+  text: '[ANN] Rails 4.2.6 and 4.1.15 have been released! https://t.co/SLDWrXDdc0'
+  posted_at: 2016-04-09 10:54:24
+  retweets: 83
+  likes: 46

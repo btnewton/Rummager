@@ -3,7 +3,7 @@ class TwitterAccountsController < ApplicationController
 	# TODO authenticate
 
 	def show
-  	@twitter_account = TwitterAccount.find_by screenname: params[:id]
+  	@twitter_account = TwitterAccount.where("lower(screenname) = ?", params[:id].downcase).first
 
   	unless @twitter_account.nil?
   		#TODO update account if necessary
@@ -12,10 +12,13 @@ class TwitterAccountsController < ApplicationController
 			  consumer_secret: "CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL",
 			}
 
-			# client = Twitter::REST::Client.new(config)
-			# update_twitter_user(client, @twitter_account)
-			# update_tweets(client, @twitter_account)
-
+			client = Twitter::REST::Client.new(config)
+			update_twitter_user(client, @twitter_account)
+			update_tweets(client, @twitter_account)
+			# logger.info @twitter_account.inspect
+			# @twitter_account.tweets do |tweet|
+				# logger.info tweet.inspect
+			# end
   	else
   		logger.info "Did not find account in database"
   		# TODO redirect to create then back here
@@ -27,7 +30,7 @@ class TwitterAccountsController < ApplicationController
 
 
   def create
-  	@twitter_account = TwitterAccount.find_by screenname: params[:twitter_account][:screenname]
+  	@twitter_account = TwitterAccount.where("lower(screenname) = ?", params[:twitter_account][:screenname].downcase).first
   	success = true
 
   	if @twitter_account.nil?
@@ -60,12 +63,11 @@ class TwitterAccountsController < ApplicationController
 	  end
 
 	  def update_tweets(client, twitter_account)
-			# TODO async delete any old posts
-
 	    options = {count: 25, include_rts: true}
 			tweets = client.user_timeline(twitter_account.screenname, options)
 
 			tweets.each do |tweet|
+				logger.info tweet
 				tweet_data = {
 					text: tweet.text,
 					posted_at: tweet.created_at,
@@ -75,6 +77,9 @@ class TwitterAccountsController < ApplicationController
 
 				twitter_account.tweets.create(tweet_data)
 			end
+
+			# TODO async delete any old posts
+
 	  end
 
 end

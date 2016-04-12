@@ -1,0 +1,20 @@
+// Place all the styles related to the twitter_user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-card {
+	padding: 12px;
+}
+.profile-card .container {
+	width: 85%;
+}
+.profile-card .row {
+	margin-bottom: 0;
+}
+.profile-card .profile-name {
+	color: white;
+	margin-bottom: 0;
+}
+.profile-card .profile-screenname {
+	color: #eee;
+}

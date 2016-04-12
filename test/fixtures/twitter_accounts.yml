@@ -1,11 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+elonmusk:
+  name: Elon Musk
+  screenname: elonmusk
+  profile_picture_url: https://pbs.twimg.com/profile_images/718273532438966274/j0h7TkOS_400x400.jpg
 
-one:
-  name: MyString
-  screenname: MyString
-  profile_picture_url: MyString
+singervehicles:
+  name: Singer Vehicle Dsgn
+  screenname: singervehicles
+  profile_picture_url: https://pbs.twimg.com/profile_images/614197780718837760/hDwU0bv4.jpg
 
-two:
-  name: MyString
-  screenname: MyString
-  profile_picture_url: MyString
+rails:
+  name: Ruby on rails
+  screenname: rails
+  profile_picture_url: https://pbs.twimg.com/profile_images/691206086955790336/CDMbA57p_400x400.png

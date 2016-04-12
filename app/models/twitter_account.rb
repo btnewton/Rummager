@@ -6,7 +6,7 @@ class TwitterAccount < ActiveRecord::Base
     screenname
   end
 
-	def is_invalid
+	def requires_reload?
 		if new_record?
 			return true
 		end
