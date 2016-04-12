@@ -11,8 +11,15 @@
 		</div>
 		<div class="col s12 offset-m2 m8 l6">
 			<div class="card-panel grey lighten-5 z-depth-1">
-					<%= render @twitter_account.tweets %>
+				<ol class="tweet-list">
+					<% @twitter_account.tweets.each do |tweet| %>
+						<li><%= render tweet %></li>
+					<% end %>
+				</ol>
 			</div>
+		</div>
+		<div class="col s12 offset-m2 m8 l3">
+			<%= render 'mentions', twitter_account: @twitter_account %>
 		</div>
 	</div>
 </div>

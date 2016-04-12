@@ -5,26 +5,22 @@ class TwitterAccountsController < ApplicationController
 	def show
   	@twitter_account = TwitterAccount.where("lower(screenname) = ?", params[:id].downcase).first
 
-  	unless @twitter_account.nil?
-  		#TODO update account if necessary
+  	if @twitter_account.nil?
+  		logger.info "Account not present in database. Redirecting to create."
+  		# TODO redirect to create then back here
+  		@twitter_account = TwitterAccount.new
+  		@twitter_account.screenname = params[:id]
+  	elsif @twitter_account.requires_reload?
+			logger.info "Reloading data for #{params[:id]}"
+
 			config = {
 			  consumer_key:    "HXxS12ZE5lzhMGnRNT3L9VYj0",
-			  consumer_secret: "CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL",
+			  consumer_secret: "CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL"
 			}
 
 			client = Twitter::REST::Client.new(config)
 			update_twitter_user(client, @twitter_account)
 			update_tweets(client, @twitter_account)
-			# logger.info @twitter_account.inspect
-			# @twitter_account.tweets do |tweet|
-				# logger.info tweet.inspect
-			# end
-  	else
-  		logger.info "Did not find account in database"
-  		# TODO redirect to create then back here
-  		@twitter_account = TwitterAccount.new
-  		@twitter_account.screenname = params[:id]
-
   	end
   end
 

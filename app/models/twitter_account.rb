@@ -1,13 +1,14 @@
 class TwitterAccount < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
-	validates :screenname, presence: true, uniqueness: true
+	validates :screenname, presence: true, 
+								uniqueness: true, length: { minimum: 1 }
 
 	def to_param
     screenname
   end
 
 	def requires_reload?
-		if new_record?
+		if new_record? || name.nil?
 			return true
 		end
 

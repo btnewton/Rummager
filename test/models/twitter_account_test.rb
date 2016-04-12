@@ -9,7 +9,7 @@ class TwitterAccountTest < ActiveSupport::TestCase
 
   test "New twitter account is invalid" do
   	twitter_account = TwitterAccount.new
-  	assert twitter_account.invalid?
+  	assert twitter_account.requires_reload?
   end
 
   test "Recent twitter acount should not be reloaded" do
