@@ -14,12 +14,14 @@ class TwitterAccountsController < ApplicationController
 
 			# client = Twitter::REST::Client.new(config)
 			# update_twitter_user(client, @twitter_account)
+			# update_tweets(client, @twitter_account)
 
   	else
   		logger.info "Did not find account in database"
   		# TODO redirect to create then back here
   		@twitter_account = TwitterAccount.new
   		@twitter_account.screenname = params[:id]
+
   	end
   end
 
@@ -71,7 +73,7 @@ class TwitterAccountsController < ApplicationController
 					likes: tweet.favorite_count
 				}
 
-				twitter_account.tweets.create(tweet)
+				twitter_account.tweets.create(tweet_data)
 			end
 	  end
 
