@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+
+	$('.brand-logo').click(function() {
+		scrollToTop();
+	  return false;
+	});
+});
+
+function scrollToTop() {
+    $('html, body').animate({
+        scrollTop: 0
+    }, 500);
+}

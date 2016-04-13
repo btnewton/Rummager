@@ -1,13 +1,9 @@
 <div class="profile-card card-panel blue lighten-1 z-depth-1">
-	<div class="container">
-		<div class="row valign-wrapper">
-				<div class="col s12 m4">
-					<%= image_tag(twitter_account.profile_picture_url, :class => "circle responsive-img") %>
-				</div>
-				<div class="col s12 m8">
-					<h5 class="profile-name"><%= twitter_account.name %></h5>
-					<h6 class="profile-screenname">@<%= twitter_account.screenname %></h6>
-				</div>
+	<div class="valign-wrapper">
+		<%= image_tag(twitter_account.profile_picture_url, :class => "circle responsive-img") %>
+		<div>
+			<h5 class="profile-name"><%= twitter_account.name %></h5>
+			<h6 class="profile-screenname">@<%= twitter_account.screenname %></h6>
 		</div>
 	</div>
 </div>

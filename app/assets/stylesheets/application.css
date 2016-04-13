@@ -16,12 +16,28 @@
 
 body {
 	background-color: #eeeeee;
+
+	/* Forces footer to bottom*/
+	display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+/* Also forces footer to bottom*/
+main {
+    flex: 1 0 auto;
 }
 body > .container > .row {
 	margin-bottom: 0 !important;
 }
 .clickable {
 	cursor: pointer;
+}
+.brand-logo {
+	font-weight: 200;
+}
+nav a {
+	margin-left: 16px;
+	margin-right: 16px;
 }
 #search-form-wrapper {
 	margin-top: 16px;

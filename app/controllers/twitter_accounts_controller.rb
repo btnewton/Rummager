@@ -3,14 +3,14 @@ class TwitterAccountsController < ApplicationController
 	# TODO authenticate
 
 	def show
-  	@twitter_account = TwitterAccount.where("lower(screenname) = ?", params[:id].downcase).first
+		screenname = sanitize_twitter_handle(params[:id])
+  	@twitter_account = TwitterAccount.where("lower(screenname) = ?", screenname.downcase).first
 
   	if @twitter_account.nil?
-  		logger.info "Account not present in database. Redirecting to create."
-  		# TODO redirect to create then back here
-  		@twitter_account = TwitterAccount.new
-  		@twitter_account.screenname = params[:id]
-  	elsif @twitter_account.requires_reload?
+  		@twitter_account = TwitterAccount.create(screenname: screenname)
+  	end
+
+  	if @twitter_account.requires_reload?
 			logger.info "Reloading data for #{params[:id]}"
 
 			config = {
@@ -19,20 +19,26 @@ class TwitterAccountsController < ApplicationController
 			}
 
 			client = Twitter::REST::Client.new(config)
-			update_twitter_user(client, @twitter_account)
-			update_tweets(client, @twitter_account)
+			
+			# TODO handle errors
+			# begin
+				update_twitter_user(client, @twitter_account)
+				update_tweets(client, @twitter_account)
+			# rescue Twitter::Error::Forbidden: e
+				# logger.info "Forbidden exception raised while trying to access #{screenname}"
+			# end
   	end
   end
 
 
   def create
-  	@twitter_account = TwitterAccount.where("lower(screenname) = ?", params[:twitter_account][:screenname].downcase).first
+  	screenname = sanitize_twitter_handle(params[:twitter_account][:screenname])
+  	@twitter_account = TwitterAccount.where("lower(screenname) = ?", screenname.downcase).first
   	success = true
 
   	if @twitter_account.nil?
-	  	@twitter_account = TwitterAccount.new(twitter_account_params)
-  		logger.info "Creating new account for " + @twitter_account.screenname
-	  	success = @twitter_account.save
+	  	@twitter_account = TwitterAccount.create(twitter_account_params)
+	  	success = !@twitter_account.new_record?
  		end
 
 	  if success
@@ -48,14 +54,18 @@ class TwitterAccountsController < ApplicationController
 	    params.require(:twitter_account).permit(:screenname)
 	  end
 
-	  def update_twitter_user(client, twitter_account) 
-	  	twitter_account_data = client.user(twitter_account.screenname)
+	  def update_twitter_user(client, twitter_account)
+  		twitter_account_data = client.user(twitter_account.screenname)
 
 	  	twitter_account.name = twitter_account_data.name
 	  	twitter_account.screenname = twitter_account_data.screen_name
 	  	twitter_account.profile_picture_url = twitter_account_data.profile_image_url
 
 	  	twitter_account.save
+	  end
+
+	  def sanitize_twitter_handle(handle)
+	  	return handle.gsub(/[^0-9a-z ]/i, '')
 	  end
 
 	  def update_tweets(client, twitter_account)
@@ -70,6 +80,10 @@ class TwitterAccountsController < ApplicationController
 					retweets: tweet.retweet_count,
 					likes: tweet.favorite_count
 				}
+
+				unless tweet.media[0].nil?
+					tweet_data[:media_url] = tweet.media[0]["media_url"]
+				end
 
 				twitter_account.tweets.create(tweet_data)
 			end

@@ -3,13 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .profile-card {
-	padding: 12px;
+	padding: 16px;
 }
-.profile-card .container {
-	width: 85%;
-}
-.profile-card .row {
-	margin-bottom: 0;
+.profile-card img {
+	margin-right: 16px;
 }
 .profile-card .profile-name {
 	color: white;
@@ -17,6 +14,10 @@
 }
 .profile-card .profile-screenname {
 	color: #eee;
+}
+
+.mentions-card h5 {
+	color: white;
 }
 
 ol.tweet-list {

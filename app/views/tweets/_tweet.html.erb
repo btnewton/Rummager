@@ -1,6 +1,12 @@
 <div class="tweet">
+	<% if tweet.retweet? %>
+		Retweet from: 
+	<% end %>
 	<div class="tweet-content flow-text">
 		<%= prep_tweet_content(tweet) %>
+		<% unless tweet.media_url.nil? %>
+			<div><%= image_tag(tweet.media_url, class: "responsive-img materialboxed") %></div>
+		<% end %>
 	</div>
 	<div class="container">
 	<div class="tweet-info row">

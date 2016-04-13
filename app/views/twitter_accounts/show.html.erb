@@ -1,15 +1,16 @@
 <div class="container">
 	<div class="row">
-		<div class="col s12 offset-m2 m8 offset-l3 l6">
+		<div class="col s12 offset-m2 m8 offset-l2 l8">
 			<%= render 'form' %>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col s12 offset-m2 m8 l3">
+		<div class="col s12 offset-m2 m8 l4">
 			<%= render 'profile', twitter_account: @twitter_account %>
+			<%= render 'mentions', twitter_account: @twitter_account %>
 		</div>
-		<div class="col s12 offset-m2 m8 l6">
+		<div class="col s12 offset-m2 m8 l8">
 			<div class="card-panel grey lighten-5 z-depth-1">
 				<ol class="tweet-list">
 					<% @twitter_account.tweets.each do |tweet| %>
@@ -17,9 +18,6 @@
 					<% end %>
 				</ol>
 			</div>
-		</div>
-		<div class="col s12 offset-m2 m8 l3">
-			<%= render 'mentions', twitter_account: @twitter_account %>
 		</div>
 	</div>
 </div>

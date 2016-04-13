@@ -12,9 +12,5 @@ class TweetTest < ActiveSupport::TestCase
   	assert_not tweet.retweet?
 	end
 
-	test "wraps links" do
-		tweet = tweets(:rails1)
-		wrapped_links = tweet.wrap_links
-		assert_equals 
-	end
+
 end
