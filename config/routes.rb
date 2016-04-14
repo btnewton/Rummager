@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'users/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -7,6 +8,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   resources :twitter_accounts do
     resources :tweets
+  end
+
+
+  authenticated :user do
+    root 'twitter_accounts#index', as: :authenticated_root
   end
 
   root 'welcome#index'

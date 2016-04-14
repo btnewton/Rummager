@@ -6,6 +6,9 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  ENV['TWITTER_CONSUMER_KEY'] = 'HXxS12ZE5lzhMGnRNT3L9VYj0'
+  ENV['TWITTER_CONSUMER_SECRET'] = 'CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL'
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -15,6 +18,12 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+  
+  # Mail contents will be seen in console
+  config.action_mailer.perform_deliveries = true
+
+  # required for mail to include links
+  config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

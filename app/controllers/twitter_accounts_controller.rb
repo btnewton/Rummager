@@ -1,6 +1,10 @@
 class TwitterAccountsController < ApplicationController
 
-	# TODO authenticate
+	before_action :authenticate_user!
+
+	def index
+		redirect_to action: "show", id: "rails"
+	end
 
 	def show
 		screenname = sanitize_twitter_handle(params[:id])
@@ -14,8 +18,8 @@ class TwitterAccountsController < ApplicationController
 			logger.info "Reloading data for #{params[:id]}"
 
 			config = {
-			  consumer_key:    "HXxS12ZE5lzhMGnRNT3L9VYj0",
-			  consumer_secret: "CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL"
+			  consumer_key:    ENV["TWITTER_CONSUMER_KEY"],
+			  consumer_secret: ENV["TWITTER_CONSUMER_SECRET"]
 			}
 
 			client = Twitter::REST::Client.new(config)
