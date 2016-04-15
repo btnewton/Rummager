@@ -9,6 +9,7 @@ class TwitterAccountsController < ApplicationController
 	def show
 		screenname = sanitize_twitter_handle(params[:id])
   	@twitter_account = TwitterAccount.where("lower(screenname) = ?", screenname.downcase).first
+		@success = true
 
   	if @twitter_account.nil?
   		@twitter_account = TwitterAccount.create(screenname: screenname)
@@ -22,19 +23,24 @@ class TwitterAccountsController < ApplicationController
 			  consumer_secret: ENV["TWITTER_CONSUMER_SECRET"]
 			}
 
-			client = Twitter::REST::Client.new(config)
-			
-			# TODO handle errors
-			# begin
-				update_twitter_user(client, @twitter_account)
-				update_tweets(client, @twitter_account)
-			# rescue Twitter::Error::Forbidden: e
-				# logger.info "Forbidden exception raised while trying to access #{screenname}"
-			# end
+			unless config[:consumer_key].nil? || config[:consumer_secret].nil?
+
+				client = Twitter::REST::Client.new(config)
+				
+				if client.user? @twitter_account.screenname
+					update_twitter_user(client, @twitter_account)
+					update_tweets(client, @twitter_account)
+				else 
+					@success = false
+				end
+			else
+				logger.info "Twitter consumer key or secret not set in environment!"
+				@success = false
+			end
   	end
 
   	@handles = []
-  	@twitter_account.tweets.each do |tweet|
+  	@twitter_account.tweets.last(TwitterAccount::MAX_TWEET_COUNT).each do |tweet|
   		tweet_handles = tweet.get_handles
   		if tweet_handles.any?
   			@handles.concat tweet_handles

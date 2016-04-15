@@ -5,6 +5,7 @@
 		</div>
 	</div>
 
+	<% if @success %>
 	<div class="row">
 		<div class="col s12 offset-m2 m8 l4">
 			<%= render 'profile', twitter_account: @twitter_account %>
@@ -13,11 +14,16 @@
 		<div class="col s12 offset-m2 m8 l8">
 			<div class="card-panel grey lighten-5 z-depth-1">
 				<ol class="tweet-list">
-					<% @twitter_account.tweets.each do |tweet| %>
+					<% @twitter_account.tweets.last(TwitterAccount::MAX_TWEET_COUNT).each do |tweet| %>
 						<li><%= render tweet %></li>
 					<% end %>
 				</ol>
 			</div>
 		</div>
 	</div>
+	<% else %>
+		<div class="row center-align">
+			Could not find the user <%= @twitter_account.screenname %> at this time
+		</div>
+	<% end %>
 </div>
