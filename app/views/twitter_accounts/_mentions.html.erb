@@ -2,9 +2,9 @@
 	<h5>Mentions</h5>
 	<div class="container">
 		<div class="row">
-			<% @handles.each do |handle| %>
+			<% @handles.uniq.each do |handle| %>
 				<div class="chip clickable waves-effect">
-			    <%= handle %>
+			    <%= link_to '@' + handle, action: "show", id: handle %>
 			  </div>
 		  <% end %>
 		</div>

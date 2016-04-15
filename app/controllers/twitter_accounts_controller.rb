@@ -33,7 +33,7 @@ class TwitterAccountsController < ApplicationController
 			# end
   	end
 
-  	@handles = Hash.new
+  	@handles = []
   	@twitter_account.tweets.each do |tweet|
   		tweet_handles = tweet.get_handles
   		if tweet_handles.any?

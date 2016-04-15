@@ -22,6 +22,10 @@ $(document).ready(function() {
     $('.modal-trigger').leanModal();
   });
 
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+
   var message_content = $('#alerts-modal .modal-content').text();
 	if ($.trim(message_content).length > 0) {
 		$('#alerts-modal').openModal();
