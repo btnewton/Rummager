@@ -1,6 +1,6 @@
-== README
+# README
 
-### Production Setup for Heroku deployment
+## Production Setup for Heroku deployment
 * Built for Ruby 2.2.3
 * Environment variable for SECRET_KEY_BASE (Rails requirement)
 ..* Required by Rails
@@ -23,7 +23,7 @@
 
 
 
-== Design
+## Design
 
-== Authentication
+### Authentication
 Although first time Rails developers are advised to create an authentication system from scratch, I decided to use Devise, having already created a log in system from scratch that had password hashing (encryption, salf and pepper), password recovery, automatic lockouts, email confirmation and a "remember me" option in PHP.
