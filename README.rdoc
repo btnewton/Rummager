@@ -1,13 +1,15 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Production Setup for Heroku deployment
+* Built for Ruby 2.2.3
+* Environment variable for SECRET_KEY_BASE (Rails requirement)
+..* Required by Rails
+* Environment variables for SendGrid SENDGRID_PASSWORD & SENDGRID_PASSWORD
+..* SendGrid is the email service used
+* Environment variables for Twitter API TWITTER_CONSUMER_KEY & TWITTER_CONSUMER_SECRET
+..* Also required for dev environment
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
+* There are no services
 
 * Configuration
 
@@ -17,16 +19,11 @@ Things you may want to cover:
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
 
+
+== Design
 
 == Authentication
 Although first time Rails developers are advised to create an authentication system from scratch, I decided to use Devise, having already created a log in system from scratch that had password hashing (encryption, salf and pepper), password recovery, automatic lockouts, email confirmation and a "remember me" option in PHP.

@@ -6,8 +6,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  ENV['TWITTER_CONSUMER_KEY'] = 'HXxS12ZE5lzhMGnRNT3L9VYj0'
-  ENV['TWITTER_CONSUMER_SECRET'] = 'CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL'
+  # ENV['TWITTER_CONSUMER_KEY'] = 'HXxS12ZE5lzhMGnRNT3L9VYj0'
+  # ENV['TWITTER_CONSUMER_SECRET'] = 'CMdVHbsn7PrxSwz0aeG8nb10vN1iCVMcH0vyDLKvpEvCDBAqfL'
 
   # Do not eager load code on boot.
   config.eager_load = false
