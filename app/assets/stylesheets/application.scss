@@ -13,12 +13,10 @@
  *= require_tree .
  *= require_self
  */
-@import "materialize/components/color";
-$primary-color: color("blue", "lighten-1") !default;
-@import 'materialize';
 
 body {
 	background-color: #eeeeee;
+	color: #212121;
 
 	/* Forces footer to bottom*/
 	display: flex;
@@ -26,10 +24,22 @@ body {
   flex-direction: column;
 }
 
+#alerts-modal h4 {
+	text-transform: capitalize;
+}
+
+h2 {
+	color: #345079;
+}
 /* Also forces footer to bottom*/
 main {
     flex: 1 0 auto;
 }
+
+.btn.invert {
+	color: #ff5252;
+}
+
 body > .container > .row {
 	margin-bottom: 0 !important;
 }

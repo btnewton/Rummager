@@ -2,23 +2,24 @@
 <html>
 <head>
   <title>Rummager</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
     <div class="navbar-fixed">
       <nav>
-        <div class="nav-wrapper z-depth-2">
+        <div class="nav-wrapper blue lighten-1 z-depth-2">
           <a href="/" class="brand-logo">Rummager</a>
             <div class="right">
               <% if user_signed_in? %>
                 <%= link_to 'Profile', edit_user_registration_path %>
                 <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-              <% else %>
-                <%= link_to 'Log In', new_user_session_path %>
               <% end %>
             </div>
         </div>
@@ -27,17 +28,10 @@
   </header>
 
   <main>
-    <div class="container">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>">
-          <%= value %>
-        </div>
-      <% end %>
-    </div>
     <%= yield %>
   </main>
   
-  <footer class="page-footer">
+  <footer class="page-footer blue lighten-1">
   <div class="container">
     <div class="row">
       <div class="col l6 s12">
@@ -53,12 +47,31 @@
       </div>
     </div>
   </div>
-  <div class="footer-copyright">
+  <div class="footer-copyright blue darken-1">
     <div class="container">
     Created April 2016
     <a class="grey-text text-lighten-4 right" href="http://brandtnewton.com">brandtnewton.com</a>
     </div>
   </div>
 </footer>
+
+<div id="alerts-modal" class="modal">
+  <div class="modal-content">
+    <% if flash.any? %>
+      <h4><%= flash.keys[0] %></h4>
+      <div id="alert-messages" class="valign-wrapper"> 
+        <% flash.each do |key, value| %>
+          <div class="alert flow-text">
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Got it</a>
+  </div>
+</div>
+
 </body>
 </html>

@@ -32,6 +32,14 @@ class TwitterAccountsController < ApplicationController
 				# logger.info "Forbidden exception raised while trying to access #{screenname}"
 			# end
   	end
+
+  	@handles = Hash.new
+  	@twitter_account.tweets.each do |tweet|
+  		tweet_handles = tweet.get_handles
+  		if tweet_handles.any?
+  			@handles.concat tweet_handles
+  		end
+  	end
   end
 
 

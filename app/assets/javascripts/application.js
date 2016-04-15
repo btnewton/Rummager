@@ -15,3 +15,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).ready(function() {
+  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+
+  var message_content = $('#alerts-modal .modal-content').text();
+	if ($.trim(message_content).length > 0) {
+		$('#alerts-modal').openModal();
+	}
+});

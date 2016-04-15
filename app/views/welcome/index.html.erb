@@ -1,7 +1,10 @@
 <div class="container">
-	<h1>Welcome!</h1>
-	<p>Start exploring Twitter!</p>
+	<h2>Welcome</h2>
+  <div class="row">
+    <p class="flow-text col offset-s1 s10">Rummager lets you explore Twitter accounts and view their 25 most recent tweets.</p>
+  </div>
 	<div class="center-align">
-    <%= link_to 'Get Started', new_user_registration_path, class: 'waves-effect btn red accent-2' %>
+    <%= link_to 'Register', new_user_registration_path, class: 'waves-effect btn red accent-2' %>
+    <%= link_to 'Log in', new_user_session_path, class: 'waves-effect btn white invert' %>
 	</div>
 </div>
