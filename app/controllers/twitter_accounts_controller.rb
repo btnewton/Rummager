@@ -20,15 +20,6 @@ class TwitterAccountsController < ApplicationController
   	if cache_manager.requires_update?
 			@success = cache_manager.update
   	end
-
-  	# TODO mode to handle extractor class
-  	@handles = []
-  	@twitter_account.tweets.last(TwitterAccount::MAX_TWEET_COUNT).each do |tweet|
-  		tweet_handles = tweet.get_handles
-  		if tweet_handles.any?
-  			@handles.concat tweet_handles
-  		end
-  	end
   end
 
 

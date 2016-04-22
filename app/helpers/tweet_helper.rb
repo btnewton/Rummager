@@ -13,6 +13,19 @@ module TweetHelper
 		return text.html_safe
 	end
 
+	def get_handles(tweets)
+		handles = []
+		
+		tweets.each do |tweet|
+			tweet_handles = tweet.get_handles
+  		if tweet_handles.any?
+  			handles.concat tweet_handles
+  		end
+		end
+
+		return handles
+	end
+
 	def wrap_links(text)
 		urls = %r{(?:https?)://\S+}i
 		return text.gsub(urls, '<a href="\0">\0</a>')

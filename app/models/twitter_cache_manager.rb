@@ -51,7 +51,7 @@ class TwitterCacheManager
 	  end
 
 	  def update_tweets(client, twitter_account)
-	    options = {count: 25, include_rts: true}
+	    options = {count: TwitterAccount::MAX_TWEET_COUNT, include_rts: true}
 			tweets = client.user_timeline(twitter_account.screenname, options)
 
 			tweets.each do |tweet|

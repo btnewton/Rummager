@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col s12 offset-m2 m8 offset-l2 l8">
-			<%= render 'form' %>
+			<%= render 'form', twitter_account: @twitter_account %>
 		</div>
 	</div>
 
@@ -9,12 +9,12 @@
 	<div class="row">
 		<div class="col s12 offset-m2 m8 l4">
 			<%= render 'profile', twitter_account: @twitter_account %>
-			<%= render 'mentions', twitter_account: @handles %>
+			<%= render 'mentions', handles: get_handles(@twitter_account.get_tweets) %>
 		</div>
 		<div class="col s12 offset-m2 m8 l8">
 			<div class="card-panel grey lighten-5 z-depth-1">
 				<ol class="tweet-list">
-					<% @twitter_account.tweets.last(TwitterAccount::MAX_TWEET_COUNT).each do |tweet| %>
+					<% @twitter_account.get_tweets.each do |tweet| %>
 						<li><%= render tweet %></li>
 					<% end %>
 				</ol>
@@ -22,8 +22,8 @@
 		</div>
 	</div>
 	<% else %>
-		<div class="row center-align">
-			Could not find the user <%= @twitter_account.screenname %> at this time
-		</div>
+	<div class="row center-align">
+		Could not find the user <%= @twitter_account.screenname %> at this time
+	</div>
 	<% end %>
 </div>

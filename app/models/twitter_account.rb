@@ -8,5 +8,10 @@ class TwitterAccount < ActiveRecord::Base
 	def to_param
     screenname
   end
+
+  def get_tweets count = MAX_TWEET_COUNT
+  	count = [count, MAX_TWEET_COUNT].min
+  	return tweets.last(count)
+  end
   
 end
