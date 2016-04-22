@@ -14,4 +14,7 @@ class TwitterAccount < ActiveRecord::Base
   	return tweets.last(count)
   end
   
+  def self.sanitize_handle(handle)
+    return handle.gsub(/[^0-9a-z_]/i, '')
+  end
 end

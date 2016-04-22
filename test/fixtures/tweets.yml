@@ -39,3 +39,12 @@ rails1:
   posted_at: 2016-04-09 10:54:24
   retweets: 83
   likes: 46
+
+<% 50.times do |n| %>
+tweet_<%= n %>:
+  twitter_account: lotsoftweets
+  text: <%= "tweet #{n}!" %>
+  posted_at: 2016-04-09 10:54:24
+  retweets: 0
+  likes: 1
+<% end %>

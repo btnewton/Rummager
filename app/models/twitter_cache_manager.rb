@@ -13,20 +13,22 @@ class TwitterCacheManager
 			  consumer_secret: ENV["TWITTER_CONSUMER_SECRET"]
 			}
 
-			unless config[:consumer_key].nil? || config[:consumer_secret].nil?
+			valid_config = !(config[:consumer_key].nil? || config[:consumer_secret].nil?)
 
-				client = Twitter::REST::Client.new(config)
+			if valid_config
+				client = Twitter::REST::Client.new config
 				
-				if client.user? @twitter_account.screenname
+				account_exists = client.user? @twitter_account.screenname
+
+				if account_exists
 					update_twitter_user(client, @twitter_account)
 					update_tweets(client, @twitter_account)
 				end
-
-				return true
-			else 
+			else
 				logger.info "Twitter consumer key or secret not set in environment!"
-				return false
 			end
+
+			return valid_config && account_exists
 	end
 
 		# indicates account should be reloaded if last load was > CACH_DURATION minutes ago

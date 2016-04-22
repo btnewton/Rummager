@@ -12,3 +12,8 @@ rails:
   name: Ruby on rails
   screenname: rails
   profile_picture_url: https://pbs.twimg.com/profile_images/691206086955790336/CDMbA57p_400x400.png
+
+lotsoftweets:
+  name: Lots of Tweets
+  screenname: lotsoftweets
+  profile_picture_url: https://pbs.twimg.com/profile_images/691206086955790336/CDMbA57p_400x400.png

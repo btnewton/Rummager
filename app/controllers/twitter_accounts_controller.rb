@@ -7,7 +7,7 @@ class TwitterAccountsController < ApplicationController
 	end
 
 	def show
-		screenname = sanitize_twitter_handle params[:id]
+		screenname = TwitterAccount.sanitize_handle params[:id]
   	@twitter_account = TwitterAccount.where("lower(screenname) = ?", screenname.downcase).first
 		@success = true
 
@@ -24,7 +24,7 @@ class TwitterAccountsController < ApplicationController
 
 
   def create
-  	screenname = sanitize_twitter_handle(params[:twitter_account][:screenname])
+  	screenname = TwitterAccount.sanitize_handle params[:twitter_account][:screenname]
   	@twitter_account = TwitterAccount.where("lower(screenname) = ?", screenname.downcase).first
   	success = true
 
@@ -45,10 +45,5 @@ class TwitterAccountsController < ApplicationController
 	  def twitter_account_params
 	    params.require(:twitter_account).permit(:screenname)
 	  end
-
-	  
-
-	  def sanitize_twitter_handle(handle)
-	  	return handle.gsub(/[^0-9a-z ]/i, '')
-	  end
+ 
 end
