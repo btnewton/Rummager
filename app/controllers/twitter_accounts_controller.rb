@@ -7,7 +7,7 @@ class TwitterAccountsController < ApplicationController
 	end
 
 	def show
-		screenname = sanitize_twitter_handle(params[:id])
+		screenname = sanitize_twitter_handle params[:id]
   	@twitter_account = TwitterAccount.where("lower(screenname) = ?", screenname.downcase).first
 		@success = true
 
@@ -17,10 +17,11 @@ class TwitterAccountsController < ApplicationController
 
   	cache_manager = TwitterCacheManager.new @twitter_account
 
-  	if cache_manager.requires_reload?
+  	if cache_manager.requires_update?
 			@success = cache_manager.update
   	end
 
+  	# TODO mode to handle extractor class
   	@handles = []
   	@twitter_account.tweets.last(TwitterAccount::MAX_TWEET_COUNT).each do |tweet|
   		tweet_handles = tweet.get_handles

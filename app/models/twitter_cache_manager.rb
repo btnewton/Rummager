@@ -30,7 +30,7 @@ class TwitterCacheManager
 	end
 
 		# indicates account should be reloaded if last load was > CACH_DURATION minutes ago
-	def requires_reload?
+	def requires_update?
 		if @twitter_account.new_record? || @twitter_account.name.nil?
 			return true
 		end
