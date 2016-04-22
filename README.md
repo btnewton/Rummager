@@ -1,4 +1,5 @@
 # README
+This is my first Ruby on Rails app.
 
 ## Production Setup for Heroku deployment
 * Built for Ruby 2.2.3 on Rails 4.2.4
