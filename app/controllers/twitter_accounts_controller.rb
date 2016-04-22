@@ -15,28 +15,10 @@ class TwitterAccountsController < ApplicationController
   		@twitter_account = TwitterAccount.create(screenname: screenname)
   	end
 
-  	if @twitter_account.requires_reload?
-			logger.info "Reloading data for #{params[:id]}"
+  	cache_manager = TwitterCacheManager.new @twitter_account
 
-			config = {
-			  consumer_key:    ENV["TWITTER_CONSUMER_KEY"],
-			  consumer_secret: ENV["TWITTER_CONSUMER_SECRET"]
-			}
-
-			unless config[:consumer_key].nil? || config[:consumer_secret].nil?
-
-				client = Twitter::REST::Client.new(config)
-				
-				if client.user? @twitter_account.screenname
-					update_twitter_user(client, @twitter_account)
-					update_tweets(client, @twitter_account)
-				else 
-					@success = false
-				end
-			else
-				logger.info "Twitter consumer key or secret not set in environment!"
-				@success = false
-			end
+  	if cache_manager.requires_reload?
+			@success = cache_manager.update
   	end
 
   	@handles = []
@@ -72,42 +54,9 @@ class TwitterAccountsController < ApplicationController
 	    params.require(:twitter_account).permit(:screenname)
 	  end
 
-	  def update_twitter_user(client, twitter_account)
-  		twitter_account_data = client.user(twitter_account.screenname)
-
-	  	twitter_account.name = twitter_account_data.name
-	  	twitter_account.screenname = twitter_account_data.screen_name
-	  	twitter_account.profile_picture_url = twitter_account_data.profile_image_url
-
-	  	twitter_account.save
-	  end
+	  
 
 	  def sanitize_twitter_handle(handle)
 	  	return handle.gsub(/[^0-9a-z ]/i, '')
 	  end
-
-	  def update_tweets(client, twitter_account)
-	    options = {count: 25, include_rts: true}
-			tweets = client.user_timeline(twitter_account.screenname, options)
-
-			tweets.each do |tweet|
-				logger.info tweet
-				tweet_data = {
-					text: tweet.text,
-					posted_at: tweet.created_at,
-					retweets: tweet.retweet_count,
-					likes: tweet.favorite_count
-				}
-
-				unless tweet.media[0].nil?
-					tweet_data[:media_url] = tweet.media[0]["media_url"]
-				end
-
-				twitter_account.tweets.create(tweet_data)
-			end
-
-			# TODO async delete any old posts
-
-	  end
-
 end
